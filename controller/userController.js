@@ -28,7 +28,8 @@ export const signupownController = async (req, res) => {
     const newuser = new User(data);
     await newuser.save();
 
-    res.status(201);
+    console.log("Request is coming for conquring")
+    res.status(201).json({message:"Account Created Successfully"})
   } catch (e) {
     console.log(e);
     res.status(500);
@@ -55,7 +56,7 @@ export const signuptrnController = async (req, res) => {
     const newuser = new User(data);
     await newuser.save();
 
-    res.status(201);
+    res.status(201).json({message:"Account Created Successfully"});
   } catch (e) {
     console.log(e);
     res.status(500);
