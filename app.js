@@ -29,7 +29,7 @@ const secret =
 app.use(
   cors({
     // origin: "http://localhost:3000",
-    origin: "https://workout-frontend-z6e3.vercel.app/",
+    origin: "https://workout-frontend-z6e3.vercel.app",
     credentials: true,
   })
 );
