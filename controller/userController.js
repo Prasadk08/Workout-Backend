@@ -7,7 +7,6 @@ import jwt from "jsonwebtoken";
 const secret =
   "aljfaoiwebs-sfasdflaskwejsnsadfslknfsdbubaeanajfkejkasdownesdowerna";
 
-
 export const signupownController = async (req, res) => {
   try {
     const data = req.body;
@@ -20,22 +19,25 @@ export const signupownController = async (req, res) => {
     data.role = "owner";
 
     const newOwner = new Owner();
-    newOwner.plans=[]
-    newOwner.members=[]
+    newOwner.plans = [];
+    newOwner.members = [];
     await newOwner.save();
-  
+
     data.refId = newOwner._id;
     const newuser = new User(data);
     await newuser.save();
 
-    console.log("Request is coming for conquring")
-    res.status(201).json({message:"Account Created Successfully"})
+    const token = jwt.sign(
+      { id: newuser._id, role: data.role, refId: data.refId },
+      secret,
+      { expiresIn: "1h" }
+    );
+    res.status(201).json({ message: "Account Created Successfully" ,token});
   } catch (e) {
     console.log(e);
     res.status(500);
   }
 };
-
 
 export const signuptrnController = async (req, res) => {
   try {
@@ -52,17 +54,21 @@ export const signuptrnController = async (req, res) => {
     data.refId = newtrainee._id;
     await newtrainee.save();
 
-
     const newuser = new User(data);
     await newuser.save();
 
-    res.status(201).json({message:"Account Created Successfully"});
+     const token = jwt.sign(
+      { id: newuser._id, role: data.role, refId: data.refId },
+      secret,
+      { expiresIn: "1h" }
+    );
+
+    res.status(201).json({ message: "Account Created Successfully", token});
   } catch (e) {
     console.log(e);
     res.status(500);
   }
 };
-
 
 export const loginController = async (req, res) => {
   try {
@@ -85,7 +91,7 @@ export const loginController = async (req, res) => {
         expiresIn: "1h",
       }
     );
-    
+
     return res.status(200).json({ msg: user.role, token });
   } catch (e) {
     console.log(e);
