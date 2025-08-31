@@ -27,7 +27,8 @@ export const ownerHomeController = async (req, res) => {
 };
 
 export const owneraddPlancontroller = async(req,res)=>{
-  let newplandata = req.body
+  try{
+    let newplandata = req.body
   
   let newPlan = await GymPlan(newplandata)
   let ownerplanAdd = await Owner.findById(req.user.refId)
@@ -35,7 +36,14 @@ export const owneraddPlancontroller = async(req,res)=>{
 
   ownerplanAdd.save()
   newPlan.save()
+  res.status(201).json({message:"Successfully added Plan"})
 
+  }
+  catch(e){
+    console.log(e)
+    res.status(500).json({error:"Something went wrong while adding plan"})
+  }
+  
 }
 
 export const ownerGetallMember =async(req,res)=>{
