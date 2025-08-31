@@ -22,6 +22,7 @@ let data= req.body
   ownerprofile.phone = data.phone;
   ownerprofile.gymLocation = data.gymLocation;
   await ownerprofile.save();
+  res.status(201).json({message:"Profile updated Successfully"})
 };
 
 
