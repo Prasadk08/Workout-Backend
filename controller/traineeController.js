@@ -1,6 +1,7 @@
 import Owner from "../model/owner.js";
 import Trainee from "../model/trainee.js";
 import PastJoining from "../model/pastjoinings.js";
+import axios from "axios";
 
 export const getAllgymController = async(req,res)=>{
   let allgym = await Owner.find()
@@ -61,3 +62,20 @@ export const confirmJoinController = async (req, res) => {
   }
 };
 
+
+export const getAiWorkoutPlan = async(req,res)=>{
+  try{
+    let userinfo = await Trainee.findById(req.user.refId)
+  
+    let data = {
+      age:userinfo.age,
+      gender:userinfo.gender,
+      personalInfo:userinfo.personalInfo
+    }
+    let aiResponse = await axios.post("https://prasadk08.app.n8n.cloud/webhook/b0fe3ecf-0a99-41e4-974e-d8495bb72b63",data)
+    res.status(200).json(aiResponse.data)
+  }catch(e){
+    console.log(e)
+    res.status(500).json({message:"Something went wrong while generating Ai response"})
+  }
+}
