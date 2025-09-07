@@ -48,7 +48,7 @@ export const uploadImageController = async (req, res) => {
     const imageUrl = `https://${process.env.S3_BUCKET_NAME}.s3.${process.env.AWS_REGION}.amazonaws.com/${fileName}`;
 
     // Store URL in MongoDB
-    const gym = await Gym.findById(req.params.gymId);
+    const gym = await Owner.findById(req.params.gymId);
     gym.images.push(imageUrl); // Assume `images` is array in schema
     await gym.save();
 

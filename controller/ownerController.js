@@ -63,9 +63,8 @@ export const ownerGetallMember =async(req,res)=>{
 
 export const ownergetTraineestatus = async (req, res) => {
   try {
-    let members = await Trainee.find()
-      .populate("myPlan", "planName") // only fetch planName from GymPlan
-      .sort({ endDate: 1 }); // soonest expiring first
+
+    let members = await Owner.findById(req.user.refId).populate('members')
 
     res.json(members);
   } catch (error) {
