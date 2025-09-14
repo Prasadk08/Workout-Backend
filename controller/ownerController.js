@@ -2,6 +2,7 @@
 import Owner from "../model/owner.js";
 import Trainee from "../model/trainee.js";
 import GymPlan from "../model/plans.js";
+import User from "../model/user.js";
 
 export const ownerHomeController = async (req, res) => {
   try {
@@ -63,10 +64,9 @@ export const ownerGetallMember =async(req,res)=>{
 
 export const ownergetTraineestatus = async (req, res) => {
   try {
-
     let members = await Owner.findById(req.user.refId).populate('members')
 
-    res.json(members);
+    res.status(201).json(members);
   } catch (error) {
     console.error(error);
     res.status(500).json({ message: "Error fetching member status" });
