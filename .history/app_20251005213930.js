@@ -9,7 +9,6 @@ import mongoose from "mongoose";
 // import { checkToken } from "./middleware.js";
 // import GymPlan from "./model/plans.js";
 import dotenv from "dotenv";
-import "./scheduleTask/traineeStatus.js"
 
 
 dotenv.config();
