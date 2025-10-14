@@ -9,7 +9,6 @@ export const ownerProfileController = async (req, res) => {
     phone: data.phone,
     gymLocation: data.gymLocation,
   };
-  console.log(response);
   res.status(200).json(response);
 };
 

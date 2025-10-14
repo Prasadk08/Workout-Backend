@@ -71,7 +71,7 @@ export const getAiWorkoutPlan = async(req,res)=>{
       gender:userinfo.gender,
       personalInfo:userinfo.personalInfo
     }
-    let aiResponse = await axios.post("https://okay2.app.n8n.cloud/webhook/b0fe3ecf-0a99-41e4-974e-d8495bb72b63",data)
+    let aiResponse = await axios.post("https://okay1.app.n8n.cloud/webhook/314a4f15-a1a8-4e54-8e24-225059615782",data)
     res.status(200).json(aiResponse.data)
   }catch(e){
     console.log(e)
