@@ -1,7 +1,6 @@
 import nodecron from 'node-cron'
-import Trainee from '../model/trainee';
 
-nodecron.schedule('* * * * * *', async () => {
+nodecron.schedule('0 0 0 * * *', async () => {
   try {
     console.log("Running membership status check...");
 

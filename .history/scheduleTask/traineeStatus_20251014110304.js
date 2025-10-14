@@ -1,5 +1,4 @@
 import nodecron from 'node-cron'
-import Trainee from '../model/trainee';
 
 nodecron.schedule('* * * * * *', async () => {
   try {
