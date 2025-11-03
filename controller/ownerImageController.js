@@ -13,6 +13,7 @@ export const uploadImageController = async (req, res) => {
     }
 
     // multer-s3 gives location (public URL) and key
+    // multer-s3 gives location (public URL) and key
     const img = {
       url: req.file.location,
       key: req.file.key,
