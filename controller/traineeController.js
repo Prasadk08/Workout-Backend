@@ -4,6 +4,7 @@ import PastJoining from "../model/pastjoinings.js";
 import axios from "axios";
 import { ChatGoogleGenerativeAI } from "@langchain/google-genai";
 
+
 export const getAllgymController = async (req, res) => {
   let allgym = await Owner.find();
   res.status(201).json(allgym);
@@ -64,17 +65,14 @@ export const getAiWorkoutPlan = async (req, res) => {
   try {
     let userinfo = await Trainee.findById(req.user.refId);
 
+
     const llm = new ChatGoogleGenerativeAI({
-      model: "gemini-1.5-pro",
-      temperature: 0,
-      maxRetries: 2,
+      apiKey: process.env.GEMINI_KEY,
+      model: "gemini-2.5-flash",
+      temperature: 0.2,
     });
 
-    let data = {
-      age: userinfo.age,
-      gender: userinfo.gender,
-      personalInfo: userinfo.personalInfo,
-    };
+
     const aiMsg = await llm.invoke([
   [
     "system",
